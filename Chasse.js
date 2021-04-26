@@ -19,10 +19,11 @@ let finCase = "</td>"
 // creation de la grille sur la carte
 function tab(taille){
     let total = debutTab
+    //génération du tableau avec l'id des coordonnées
     for (let a = 0; a < taille; a++){
         total = total+debutLigne
         for (let b = 0; b < taille; b++){
-            total = total + debutCase + a + milieuCase + b + finMilieuCase + finCase
+            total = total + debutCase + a + milieuCase + b + finMilieuCase + finCase //coordonnées a-b
         }
         total = total+finLigne
     }
@@ -31,6 +32,11 @@ function tab(taille){
 }
 
 //évènement sans impact sur le score ou la partie
+let noImpact = ["Il n'y a rien ici... Vous pouvez continuer votre chemin.",
+    "Le vent du nord se lève.. L'air se raffraichi mais vous pouvez continuer.",
+    "Un animal étripé est sur votre chemin, des relants de votre repas remontent, vous fuyiez la zone pour continuer",
+    "Vous avez mangé du sable en croyant voir un oasis, fuyiez cette zone avant de faire une insolation",
+    "Vous vous rendez compte que des vautours tournoient au-dessus de vous, vous devriez vous dépechez"]
 let nothing = "Il n'y a rien ici... Vous pouvez continuer votre chemin."
 let vent = "Le vent du nord se lève.. L'air se raffraichi mais vous pouvez continuer."
 let tripes = "Un animal étripé est sur votre chemin, des relants de votre repas remontent, vous fuyiez la zone pour continuer"
