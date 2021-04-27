@@ -5,7 +5,8 @@ function tableau2D(x,y){
     }
     return table
 }
-console.log(tableau2D(3,2))
+
+
 // définitions des variable contenant le html servant a générer le tableau
 let recup = document.getElementById("tab")
 let debutTab = "<table>"
@@ -37,114 +38,87 @@ let noImpact = ["Il n'y a rien ici... Vous pouvez continuer votre chemin.",
     "Un animal étripé est sur votre chemin, des relants de votre repas remontent, vous fuyiez la zone pour continuer",
     "Vous avez mangé du sable en croyant voir un oasis, fuyiez cette zone avant de faire une insolation",
     "Vous vous rendez compte que des vautours tournoient au-dessus de vous, vous devriez vous dépechez"]
-let nothing = "Il n'y a rien ici... Vous pouvez continuer votre chemin."
-let vent = "Le vent du nord se lève.. L'air se raffraichi mais vous pouvez continuer."
-let tripes = "Un animal étripé est sur votre chemin, des relants de votre repas remontent, vous fuyiez la zone pour continuer"
-let oasis = "Vous avez mangé du sable en croyant voir un oasis, fuyiez cette zone avant de faire une insolation"
-let vautours = "Vous vous rendez compte que des vautours tournoient au-dessus de vous, vous devriez vous dépechez"
-//malus
-let voiture = "Vous tombez en panne d'essence, vous devez vous rendre dans la ville la plus proche.. Cela vous fait perdre une journée"
-let sable = "Vous vous êtes coincé dans un sable mouvant, vous mettez une journée a en sortir"
-//gros malus
-let indiens = "Des Indiens vous attaquent, après les avoirs semés vous mettez deux jours a retrouvez votre chemin."    
-//bonus
-let bousolle = "Alors que vous pensiez être perdu, vous trouvez une boussole à moitier enfouie qui vous permez de retrouver votre chemin"
-//gros bonus
-let sac = "Vous trouvez un sac de survie vous permettant de passer quelques nuit en toute sécurité (ou presque), cela vous fait gagner deux jours"
-//défaite
-let mine = "Vous marchez sur une mine la mort vous a rattrapez plus vite que prévus..."
-let piege = "Un piège a ours se referme sur votre jambe vous laissant seul dans le désert du Colorado en attandant une mort certaine"
-//victoire
-let tresor = "Vous avez gagnez !"
-//evenement secu
-let caseDejaClic = "Vous avez déjà fouillez cette zone, allez en fouiller une autre.."
 
-var eventt = new Array(100)
-//je met tous les evenement dans un tableau afin de les tirer au sort
-for (i = 0; i < 20; i++){
-    eventt[i] = nothing
+let malus = ["Vous vous êtes coincé dans un sable mouvant, vous mettez une journée a en sortir",
+    "Vous tombez en panne d'essence, vous devez vous rendre dans la ville la plus proche.. Cela vous fait perdre une journée"]
+
+let grosMalus = ["Des Indiens vous attaquent, après les avoirs semés vous mettez deux jours a retrouvez votre chemin."]
+
+let bonus = ["Vous trouvez un sac de survie vous permettant de passer quelques nuit en toute sécurité (ou presque), cela vous fait gagner deux jours"]
+
+let grosBonus = ["Vous trouvez un sac de survie vous permettant de passer quelques nuit en toute sécurité (ou presque), cela vous fait gagner deux jours"]
+
+let mort = ["Vous marchez sur une mine la mort vous a rattrapez plus vite que prévus...",
+    "Un piège a ours se referme sur votre jambe vous laissant seul dans le désert du Colorado en attandant une mort certaine"]
+
+var poidsEvent = new Array(100)
+
+for (i = 0; i < 80; i++){
+    poidsEvent[i] = 0
 }
-for (i = 20; i < 35; i++){
-    eventt[i] = vent
-}
-for (i = 35; i < 50; i++){
-    eventt[i] = tripes
-}
-for (i = 50; i < 65; i++){
-    eventt[i] = oasis
-}
-for (i = 65; i < 80; i++){
-    eventt[i] = vautours
-}
-for (i = 80; i < 85; i++){
-    eventt[i] = voiture
-}
-for (i = 85; i < 90; i++){
-    eventt[i] = sable
+for (i = 80; i < 90; i++){
+    poidsEvent[i] = 1
 }
 for (i = 90; i < 95; i++){
-    eventt[i] = bousolle
+    poidsEvent[i] = -1
 }
-eventt[95] = sac
-eventt[96] = indiens
-eventt[97] = mine 
-eventt[98] = piege  
-eventt[99] = tresor
-
-console.log(eventt)
+poidsEvent[95] = -2
+poidsEvent[96] = 2
+poidsEvent[97] = 3 
+poidsEvent[98] = 3  
 
 let rand
-let done = []
-let simil = false
-let jours = 0
 
-function evenement(id){
-    compare()
-    while(simil == true){ //tirge d'un nombre aléatoire et on recommence jusqu'a avoir un nombre qui n'a jamais été tirer
-        compare()
-    }
-    if(rand == 97 || rand == 98){
-        document.getElementById(id).style.backgroundColor = "rgba(255, 0, 0, 0.6)" //evenement conduisant a la mort donc case en rouge
-        document.getElementById("jours").innerHTML = "Vous n'avez pas trouver le trésor mais vous avez réussis à survivre "+jours+" jours"
-    }
-    else if(rand == 96){
-        document.getElementById(id).style.backgroundColor = "rgba(251, 69, 13, 0.5)"
-        jours += 3
+console.log(noImpact[2])
+
+function choixEvent(id) {
+    rand = Math.floor(Math.random()*poidsEvent.length+1)
+    
+    if(rand < 80){
+        document.getElementById(id).style.backgroundColor = "rgba(255, 255, 0, 0.3)" //evenements sans importance donc case en jaune
+        jours++
         document.getElementById("jours").innerHTML = "Vous voyagez depuis <br>"+jours+" jours"
+        rand = Math.floor(Math.random()*noImpact.length)
+        document.getElementById("rep").innerHTML = noImpact[rand]
     }
-    else if(rand == 95){
-        document.getElementById(id).style.backgroundColor = "rgba(0, 214, 0, 0.4)"
-        jours = jours - 1
-        document.getElementById("jours").innerHTML = "Vous voyagez depuis <br>"+jours+" jours"
-    }
-    else if(rand == 90 || rand == 91 || rand == 92 || rand == 93 || rand == 94){
-        document.getElementById(id).style.backgroundColor = "rgba(0, 214, 0, 0.4)"
-        document.getElementById("jours").innerHTML = "Vous voyagez depuis <br>"+jours+" jours"
-    }
-    else if(rand == 80 || rand == 81 || rand == 82 || rand == 83 || rand == 84 || rand == 85 || rand == 86 || rand == 87 || rand == 88 || rand == 89){
-        document.getElementById(id).style.backgroundColor = "rgba(240, 80, 13, 0.5)"
+    else if(rand >= 80 && rand < 90){
+        document.getElementById(id).style.backgroundColor = "rgba(240, 80, 13, 0.5)" //petit maluce donc rouge clair
         jours += 2
         document.getElementById("jours").innerHTML = "Vous voyagez depuis <br>"+jours+" jours"
+        rand = Math.floor(Math.random()*malus.length)
+        document.getElementById("rep").innerHTML = malus[rand]
     }
-    else{
-        document.getElementById(id).style.backgroundColor = "rgba(255, 255, 0, 0.3)" //evenements sans importance donc case en jaune
-        jours++ //compteur du nombres de jours
+    else if(rand >= 90 && rand < 95){
+        document.getElementById(id).style.backgroundColor = "rgba(0, 214, 0, 0.4)" //petit bonus donc vert clair
         document.getElementById("jours").innerHTML = "Vous voyagez depuis <br>"+jours+" jours"
+        rand = Math.floor(Math.random()*bonus.length)
+        document.getElementById("rep").innerHTML = bonus[rand]
     }
-    done.push(rand) //liste des nombre déjà tirer
-    console.log(done)
-    document.getElementById("rep").innerHTML = eventt[rand] //affichage de l'évènement tirer dans le div "rep"
+    else if(rand == 95){
+        document.getElementById(id).style.backgroundColor = "rgba(0, 214, 0, 0.4)" //gros bonus donc vert foncé
+        jours = jours - 1
+        document.getElementById("jours").innerHTML = "Vous voyagez depuis <br>"+jours+" jours"
+        rand = Math.floor(Math.random()*grosBonus.length)
+        document.getElementById("rep").innerHTML = grosBonus[rand]
+    }
+    else if(rand == 96){
+        document.getElementById(id).style.backgroundColor = "rgba(251, 69, 13, 0.5)" //gros malus donc rouge foncé
+        jours += 3
+        document.getElementById("jours").innerHTML = "Vous voyagez depuis <br>"+jours+" jours"
+        rand = Math.floor(Math.random()*grosMalus.length)
+        document.getElementById("rep").innerHTML = grosMalus[rand] 
+    }
+    else {
+        document.getElementById(id).style.backgroundColor = "rgba(255, 0, 0, 0.6)" //evenement conduisant a la mort donc case en rouge foncé
+        jours++
+        document.getElementById("jours").innerHTML = "Vous n'avez pas trouver le trésor mais vous avez réussis à survivre "+jours+" jours"
+        rand = Math.floor(Math.random()*mort.length)
+        document.getElementById("rep").innerHTML = mort[rand]
+    }
 }
 
-function compare(){//choisi un nombre aléatoire entre 0 et 98 pour savoir quelle evenement est sur la case qui vient detre clicker
-    simil = false
-    rand = Math.floor(Math.random()*99)
-    for (i = 0; i < 100; i++){
-        if(rand == done[i]){ //retire un nombre si il a deja été tirer pour ne pas avoir plusieur fois le meme evenement 
-            simil = true
-        }
-    }
-}
+
+
 
 let dejaClic = []
 let caseClicX 
@@ -157,8 +131,6 @@ function clic(id){// fonction qui récupère l'id de la case qui vient d'etre cl
     block = document.getElementById(id);
     caseClicX = id.substr(3, 3)
     caseClicY = id.substr(1, 1)
-    console.log(caseClicX)
-    console.log(caseClicY)
     if (posTresor == id){
         document.getElementById("rep").innerHTML = eventt[99] // phrase de reponse en cas de victoire
         document.getElementById(id).style.backgroundColor = "rgba(0, 0, 255, 0.4)"// affichage de la case du trésor en bleu
@@ -187,8 +159,7 @@ function deuxClic(id){ //fonction permettant de savoir si case clicker a déjà 
     if(simil == false){ //sinon éxécuter le reste 
         dejaClic[compteur] = id
         compteur++ 
-        console.log(dejaClic)
-        evenement(id)   
+        choixEvent(id)   
     }
     
 }
