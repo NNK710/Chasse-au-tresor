@@ -33,23 +33,23 @@ function tab(taille){
 }
 
 //évènement sans impact sur le score ou la partie
-let noImpact = ["Il n'y a rien ici... Vous pouvez continuer votre chemin.",
-    "Le vent du nord se lève.. L'air se raffraichi mais vous pouvez continuer.",
-    "Un animal étripé est sur votre chemin, des relants de votre repas remontent, vous fuyiez la zone pour continuer",
-    "Vous avez mangé du sable en croyant voir un oasis, fuyiez cette zone avant de faire une insolation",
-    "Vous vous rendez compte que des vautours tournoient au-dessus de vous, vous devriez vous dépechez"]
+// let noImpact = ["Il n'y a rien ici... Vous pouvez continuer votre chemin.",
+//     "Le vent du nord se lève.. L'air se raffraichi mais vous pouvez continuer.",
+//     "Un animal étripé est sur votre chemin, des relants de votre repas remontent, vous fuyiez la zone pour continuer",
+//     "Vous avez mangé du sable en croyant voir un oasis, fuyiez cette zone avant de faire une insolation",
+//     "Vous vous rendez compte que des vautours tournoient au-dessus de vous, vous devriez vous dépechez"]
 
-let malus = ["Vous vous êtes coincé dans un sable mouvant, vous mettez une journée a en sortir",
-    "Vous tombez en panne d'essence, vous devez vous rendre dans la ville la plus proche.. Cela vous fait perdre une journée"]
+// let malus = ["Vous vous êtes coincé dans un sable mouvant, vous mettez une journée a en sortir",
+//     "Vous tombez en panne d'essence, vous devez vous rendre dans la ville la plus proche.. Cela vous fait perdre une journée"]
 
-let grosMalus = ["Des Indiens vous attaquent, après les avoirs semés vous mettez deux jours a retrouvez votre chemin."]
+// let grosMalus = ["Des Indiens vous attaquent, après les avoirs semés vous mettez deux jours a retrouvez votre chemin."]
 
-let bonus = ["Vous trouvez un sac de survie vous permettant de passer quelques nuit en toute sécurité (ou presque), cela vous fait gagner deux jours"]
+// let bonus = ["Vous trouvez un sac de survie vous permettant de passer quelques nuit en toute sécurité (ou presque), cela vous fait gagner deux jours"]
 
-let grosBonus = ["Vous trouvez un sac de survie vous permettant de passer quelques nuit en toute sécurité (ou presque), cela vous fait gagner deux jours"]
+// let grosBonus = ["Vous trouvez un sac de survie vous permettant de passer quelques nuit en toute sécurité (ou presque), cela vous fait gagner deux jours"]
 
-let mort = ["Vous marchez sur une mine la mort vous a rattrapez plus vite que prévus...",
-    "Un piège a ours se referme sur votre jambe vous laissant seul dans le désert du Colorado en attandant une mort certaine"]
+// let mort = ["Vous marchez sur une mine la mort vous a rattrapez plus vite que prévus...",
+//     "Un piège a ours se referme sur votre jambe vous laissant seul dans le désert du Colorado en attandant une mort certaine"]
 
 var poidsEvent = new Array(100)
 
@@ -68,8 +68,6 @@ poidsEvent[97] = 3
 poidsEvent[98] = 3  
 
 let rand
-
-console.log(noImpact[2])
 
 function choixEvent(id) {
     rand = Math.floor(Math.random()*poidsEvent.length+1)
@@ -175,5 +173,83 @@ function emplacementTresor(){   //fonction qui place le trésort aléatoirement 
     console.log(posTresor)
 }
 
+//évènement sans impact sur le score ou la partie
+let noImpact = [0.8,1,"Il n'y a rien ici... Vous pouvez continuer votre chemin.",
+    "Le vent du nord se lève.. L'air se raffraichi mais vous pouvez continuer.",
+    "Un animal étripé est sur votre chemin, des relants de votre repas remontent, vous fuyiez la zone pour continuer",
+    "Vous avez mangé du sable en croyant voir un oasis, fuyiez cette zone avant de faire une insolation",
+    "Vous vous rendez compte que des vautours tournoient au-dessus de vous, vous devriez vous dépechez"]
+
+let malus = [0.1,2,"Vous vous êtes coincé dans un sable mouvant, vous mettez une journée a en sortir",
+    "Vous tombez en panne d'essence, vous devez vous rendre dans la ville la plus proche.. Cela vous fait perdre une journée"]
+
+let grosMalus = [0.01,3,"Des Indiens vous attaquent, après les avoirs semés vous mettez deux jours a retrouvez votre chemin."]
+
+let bonus = [0.05,-1,"Vous trouvez un sac de survie vous permettant de passer quelques nuit en toute sécurité (ou presque), cela vous fait gagner deux jours"]
+
+let grosBonus = [0.01,-2,"Vous trouvez un sac de survie vous permettant de passer quelques nuit en toute sécurité (ou presque), cela vous fait gagner deux jours"]
+
+let mort = [0.02,0,"Vous marchez sur une mine la mort vous a rattrapez plus vite que prévus...",
+    "Un piège a ours se referme sur votre jambe vous laissant seul dans le désert du Colorado en attandant une mort certaine"]
+
+//creation de la class evenement pour tirer les evenements au hasard
+class Evenement {
+    #nomEvenement = "";
+    #poidsEvenement = 0;
+    #probaEvenement = 0;
+
+    //construction de la class
+    constructor(nomEvenement, poidsEvenement, probaEvenement){
+        this.#nomEvenement = nomEvenement;
+        this.#poidsEvenement = poidsEvenement;
+        this.#probaEvenement = probaEvenement;
+    }
+
+    //méthode sur le nom 
+    get NomEvenement(){
+        return this.#nomEvenement;
+    }
+    set NomEvenement(nouveauNomEvenement){
+        this.#nomEvenement = nouveauNomEvenement
+    }
+
+    //méthode sur le poids 
+    get PoidsEvenement(){
+        return this.#poidsEvenement;
+    }
+    set PoidsEvenement(nouveauPoidsEvenement){
+        this.#poidsEvenement = nouveauPoidsEvenement;
+    }
+
+    //méthode sur le poids 
+    get ProbaEvenement(){
+        return this.#probaEvenement;
+    }
+    set ProbaEvenement(nouveauProbaEvenement){
+        this.#probaEvenement = nouveauProbaEvenement;
+    }
+}
+
+//fonction pour générer la liste des évenement
+function collection(){
+    let listeEvent = [];
+    for (let i=0;i<50;i++){
+        listeEvent.push(new Evenement(noImpact[2],noImpact[1],noImpact[0]))
+    }
+    for (let i=50;i<100;i++){
+        listeEvent.push(new Evenement(noImpact[3],noImpact[1],noImpact[0]))
+    }
+    Affichage(listeEvent)
+}
+
+//affichage d'une collection d'objet Score
+function Affichage(listeEvent){
+    for (let i=0;i<100;i++){
+        unEvent = listeEvent[i]
+        console.log("nom : ", unEvent.NomEvenement, "poids: ", unEvent.PoidsEvenement, "proba: ",unEvent.ProbaEvenement);
+    }
+}
+
+collection()
 emplacementTresor()
 tab(10)
