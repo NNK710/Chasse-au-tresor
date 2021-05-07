@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <link rel="icon" type="image/png" href="tresor.ico" />
@@ -9,10 +9,18 @@
     </head>
     <body>
         <h1>Chasse au trésor !</h1>
-        <div id="imgLose">
-            <img id="croix" src="game-over-you-lose.jpg">
+        <div id="perdu">
+            <img id="gameOver" src="game-over-you-lose.jpg">
+            <div id="affichageDroite">
+                <div id="scorePerdu">
+                    <h2 id="titreScorePerdu">Votre score est de :</h2>
+                    <br>
+                </div>
+                <br>
+                <input id='againLost' class='again' type="button" onclick="window.location.href ='Chasse.html';" value="Relancer une partie ?">
+            </div>
         </div>
-        <input id='again' type="button" onclick="window.location.href ='Chasse.html';" value="Relancer une partie ?">
+        
     </body>
-    <script type="text/javascript" src="Chasse.js"></script>
+    <!-- <script type="text/javascript" src="Chasse.js"></script> -->
 </html>

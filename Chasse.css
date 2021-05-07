@@ -62,10 +62,10 @@ h1{
 #legende{
     background-color: white;
     width: 320px;
-    height: 200px;
+    height: 215px;
     border-radius: 10px;
     font-family: 'Holtwood One SC', serif;
-    font-size: 9px;
+    font-size: 10px;
     
 }
 h2{
@@ -75,10 +75,11 @@ h2{
     font-size: 22px;
     /* background-color: red; */
 }
-#again{
+.again{
     border-radius: 10px;
     width: 320px;
     height: 30px;
+    font-family: 'Holtwood One SC', serif;
 }
 
 #compteur{
@@ -97,10 +98,61 @@ h2{
     font-family: 'Holtwood One SC', serif;
     font-size: 13px
 }
-#again{
-    font-family: 'Holtwood One SC', serif;
-}
 #croix{
-    height: 45px;
-    width: 35px;
+    height: 23px;
+    width: 36px;
+    margin-top: 1%;
 }
+#gameOver{
+    height: 40%;
+    width: 40%;
+    margin-left: 10%;
+    margin-top: 1%;
+}
+#againLost{
+    margin-left: 20%;
+    margin-top: 20%; 
+    height: 30%;
+    width: 100%;
+}
+#perdu{
+    display: flex;
+}
+#scorePerdu{
+    background-color: white;
+    height: 400px;
+    width: 600px;
+    border-radius: 10px;
+    font-family: 'Holtwood One SC', serif;
+    margin-left: 20%;
+}
+#titreScorePerdu{
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+#imgWin{
+    height: 100%;
+    width: 40%;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+#jaune, #vert, #orange{
+    height: 20px;
+    width: 35px;
+    background: yellow;
+    border-radius: 3px;
+}
+.pCroix{
+    padding-bottom: -10px;
+}
+/* #legendeCroix{
+    white-space:nowrap;
+} */
+#legendeJaune, #legendeVert, #legendeOrange{
+    padding-top: 5px;
+    padding-left: 2px;
+}
+.pJaune{
+    padding-bottom: -10px;
+}
+

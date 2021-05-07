@@ -33,6 +33,7 @@ function clic(id){// fonction qui récupère l'id de la case qui vient d'etre cl
     if (posTresor == id){ //verifie si la case clické est celle du trésor
         document.getElementById("rep").innerHTML = "Bravo vous avez trouvé le trésor !" // phrase de reponse en cas de victoire
         document.getElementById(id).style.backgroundColor = "rgba(0, 0, 255, 0.4)"// affichage de la case du trésor en bleu
+        window.location.href ='WinPage.html';
     }
     else if(caseClicY == posTresorY || caseClicX == posTresorX){ 
         document.getElementById(id).style.backgroundImage = "url('croix.png')";//croix quand la lagitude ou la latitude est trouvée
@@ -67,7 +68,8 @@ let posTresor
 let posTresorX
 let posTresorY
 
-function emplacementTresor(){   //fonction qui place le trésort aléatoirement sur la carte
+//fonction qui place le trésort aléatoirement sur la carte
+function emplacementTresor(){   
     posTresorX = Math.floor(Math.random()*10)   //chiffre aléatoire des X
     posTresorY = Math.floor(Math.random()*10)   //chiffre aléatoire des Y
     posTresor = "c"+posTresorY+"-"+posTresorX   //concaténation
